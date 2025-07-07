@@ -14,6 +14,9 @@ class RobotApp
   def initialize(io: IOProxy.new)
     @io = io
 
+    @max_x = 6
+    @max_y = 6
+
     # Position (0,0) on the grid is the south west corner
     @x = 0
     @y = 0
@@ -69,8 +72,16 @@ class RobotApp
       else
        raise "Unknown orientation #{@orientation}"
       end
-    @x = match[1].to_i
-    @y = match[2].to_i
+    x = match[1].to_i
+    y = match[2].to_i
+
+    if x < 0 or y < 0 or x >= @max_x or y >= @max_y
+      # Don't action any part of a command that would put the robot out of bounds
+      return
+    end
+
+    @x = x
+    @y = y
     @orientation = o
   end
 
