@@ -86,5 +86,19 @@ RSpec.describe RobotApp do
         expect(output.read).to include("0,0,W")
       end
     end
+
+    describe "starting up down, facing n" do
+      let(:input) { "PLace 0,1,n\nmove\nreport\nquit\n" }
+      it "prints a default position" do
+        expect(output.read).to include("0,2,N")
+      end
+    end
+
+    describe "starting one up, facing s" do
+      let(:input) { "PLace 0,1,s\nmove\nreport\nquit\n" }
+      it "prints a default position" do
+        expect(output.read).to include("0,0,S")
+      end
+    end
   end
 end

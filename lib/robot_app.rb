@@ -9,6 +9,8 @@ class RobotApp
   def run
     @io.puts "Toy robot, waiting for input"
 
+
+    # Position (0,0) on the grid is the south west corner
     x = 0
     y = 0
     orientation = "E"
@@ -32,6 +34,10 @@ class RobotApp
           x += 1
         when "W"
           x -= 1
+        when "N"
+          y += 1
+        when "S"
+          y -= 1
         end
       end
 
