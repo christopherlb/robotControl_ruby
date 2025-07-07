@@ -1,7 +1,28 @@
 # About
 Implement the robot control toy problem, specifically in Ruby.
 
-# Instruction:
+
+# How to use the app
+
+
+```shell
+bundle install
+rspec
+ruby app/main.rb
+```
+
+## Commands
+
+You can type or pipe commands via stdin. Commands need to be separated with a newline. They are not case sensitive.
+
+| Command | Action                |
+|---------|-----------------------|
+| quit    | Exits the application |
+
+
+# Task
+
+## Instruction:
 write code to solve the problem below as this was production code, putting as much effort and care as you would for production code, no less, no more.
 
 We need instruction on how to run what you provide, but do not expect a docker image or anything related to infrastructure. For example:
