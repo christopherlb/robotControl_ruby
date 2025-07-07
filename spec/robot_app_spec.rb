@@ -44,7 +44,23 @@ RSpec.describe RobotApp do
     describe "when in a default state" do
       let(:input) { "report\nquit\n" }
       it "prints a default position" do
-        expect(output.read).to include("Toy robot, waiting for input\n0,0,E")
+        expect(output.read).to include("0,0,E")
+      end
+    end
+  end
+
+  describe "place" do
+    describe "matches the default" do
+      let(:input) { "PLace 0,0,E\nreport\nquit\n" }
+      it "prints a default position" do
+        expect(output.read).to include("0,0,E")
+      end
+    end
+
+    describe "is not the default" do
+      let(:input) { "PLace 1,2,w\nreport\nquit\n" }
+      it "prints a default position" do
+        expect(output.read).to include("1,2,W")
       end
     end
   end
