@@ -75,14 +75,20 @@ class RobotApp
     x = match[1].to_i
     y = match[2].to_i
 
-    if x < 0 or y < 0 or x >= @max_x or y >= @max_y
-      # Don't action any part of a command that would put the robot out of bounds
-      return
-    end
+    return if out_of_range(x, y)
 
     @x = x
     @y = y
     @orientation = o
+  end
+
+  def out_of_range(x, y)
+    if x < 0 or y < 0 or x >= @max_x or y >= @max_y
+      # Don't action any part of a command that would put the robot out of bounds
+      true
+    else
+      false
+    end
   end
 
   def handle_report
@@ -103,18 +109,24 @@ class RobotApp
   end
 
   def handle_move
+    x = @x
+    y = @y
     case @orientation
     when Orientation::EAST
-      @x += 1
+      x += 1
     when Orientation::WEST
-      @x -= 1
+      x -= 1
     when Orientation::NORTH
-      @y += 1
+      y += 1
     when Orientation::SOUTH
-      @y -= 1
+      y -= 1
     else
       raise "Unknown orientation #{@orientation}"
     end
+
+    return if out_of_range(x, y)
+    @x = x
+    @y = y
   end
 
   def handle_rotate(direction)

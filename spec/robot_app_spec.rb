@@ -114,6 +114,34 @@ RSpec.describe RobotApp do
         expect(output.read).to include("0,0,S")
       end
     end
+
+    describe "when moving west off board" do
+      let(:input) { "place 0,0,w\nmove\nreport\nquit\n" }
+      it "doesn't move" do
+        expect(output.read).to include("0,0,W")
+      end
+    end
+
+    describe "when moving east off board" do
+      let(:input) { "place 5,0,e\nmove\nreport\nquit\n" }
+      it "doesn't move" do
+        expect(output.read).to include("5,0,E")
+      end
+    end
+
+    describe "when moving north off board" do
+      let(:input) { "place 0,5,n\nmove\nreport\nquit\n" }
+      it "doesn't move" do
+        expect(output.read).to include("0,5,N")
+      end
+    end
+
+    describe "when moving south off board" do
+      let(:input) { "place 0,0,s\nmove\nreport\nquit\n" }
+      it "doesn't move" do
+        expect(output.read).to include("0,0,S")
+      end
+    end
   end
 
   describe "left" do
