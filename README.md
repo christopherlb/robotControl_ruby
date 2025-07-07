@@ -19,6 +19,12 @@ You can type or pipe commands via stdin. Commands need to be separated with a ne
 |---------|-----------------------|
 | quit    | Exits the application |
 
+# Development philosophy
+
+- Iterative development, with a feature breadth first approach
+- TDD as we go
+- Emergent design
+- KISS
 
 # Task
 
