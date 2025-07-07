@@ -27,7 +27,12 @@ class RobotApp
       end
 
       if input == "move"
-        x += 1
+        case orientation
+        when "E"
+          x += 1
+        when "W"
+          x -= 1
+        end
       end
 
       break if input == "quit"

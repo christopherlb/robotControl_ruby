@@ -81,7 +81,7 @@ RSpec.describe RobotApp do
     end
 
     describe "starting one over, facing w" do
-      let(:input) { "PLace 1,0,w\nreport\nquit\n" }
+      let(:input) { "PLace 1,0,w\nmove\nreport\nquit\n" }
       it "prints a default position" do
         expect(output.read).to include("0,0,W")
       end
