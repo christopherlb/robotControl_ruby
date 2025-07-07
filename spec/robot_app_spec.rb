@@ -101,4 +101,22 @@ RSpec.describe RobotApp do
       end
     end
   end
+
+  describe "left" do
+    describe "when starting facing north" do
+      let(:input) { "place 0,0,n\nleft\nreport\nquit\n" }
+      it "orients west" do
+        expect(output.read).to include("0,0,W")
+      end
+    end
+  end
+
+  describe "right" do
+    describe "when starting facing north" do
+      let(:input) { "place 0,0,n\nright\nreport\nquit\n" }
+      it "orients east" do
+        expect(output.read).to include("0,0,E")
+      end
+    end
+  end
 end

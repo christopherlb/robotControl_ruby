@@ -4,11 +4,11 @@ require_relative 'io_proxy'
 class RobotApp
 
   module Orientation
-    EAST = 1
-    SOUTH = 2
-    WEST = 3
-    NORTH = 4
-    ORIENTATION_MAX = 5
+    EAST = 0
+    SOUTH = 1
+    WEST = 2
+    NORTH = 3
+    ORIENTATION_MAX = 4
   end
 
   def initialize(io: IOProxy.new)
@@ -40,6 +40,14 @@ class RobotApp
 
       if input == "move"
         handle_move
+      end
+
+      if input == "left"
+        handle_rotate(-1)
+      end
+
+      if input == "right"
+        handle_rotate(1)
       end
 
       break if input == "quit"
@@ -96,5 +104,9 @@ class RobotApp
     else
       raise "Unknown orientation #{@orientation}"
     end
+  end
+
+  def handle_rotate(direction)
+    @orientation = (@orientation + direction) % Orientation::ORIENTATION_MAX
   end
 end
