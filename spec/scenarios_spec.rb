@@ -40,4 +40,46 @@ RSpec.describe RobotApp do
       expect(output.read).to include("1,2,E")
     end
   end
+
+  describe "Multiple reports" do
+    let(:input) { ["PLACE 0,0,N", "MOVE", "MOVE", "RIGHT", "MOVE", "REPORT", "MOVE", "REPORT"] }
+    it "outputs them both on separate lines" do
+      expect(output.read).to include("1,2,E\n2,2,E")
+    end
+  end
+
+  describe "Re-place" do
+    let(:input) { ["PLACE 0,0,N", "MOVE", "MOVE", "PLACE 0,0,N", "RIGHT", "MOVE", "REPORT"] }
+    it "follows instructions according to new start" do
+      expect(output.read).to include("1,0,E")
+    end
+  end
+
+  describe "Invalid commands" do
+    let(:input) { ["PLACE 0,0,N", "MOVE", "MOVNE", "RIGHT", "MOVE", "REPORT"] }
+    it "are ignored" do
+      expect(output.read).to include("1,1,E")
+    end
+  end
+
+  describe "Out of grid movements" do
+    let(:input) do
+      ["PLACE 0,0,E",
+       "MOVE", "MOVE", "MOVE", "MOVE", "MOVE", "MOVE", "MOVE",
+       "LEFT",
+       "MOVE", "MOVE", "MOVE", "MOVE", "MOVE", "MOVE", "MOVE",
+       "RIGHT",
+       "REPORT"]
+    end
+    it "are ignored" do
+      expect(output.read).to include("5,5,E")
+    end
+  end
+
+  describe "donuts" do
+    let(:input) { ["PLACE 0,0,E", "RiGHT", "RiGHT", "RiGHT", "RiGHT", "REPORT"] }
+    it "result in the original orientation" do
+      expect(output.read).to include("0,0,E")
+    end
+  end
 end
