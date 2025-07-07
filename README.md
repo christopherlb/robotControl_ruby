@@ -33,6 +33,8 @@ You can type or pipe commands via stdin. Commands need to be separated with a ne
 - Emergent design
 - KISS
 - Assume the service will not grow significantly in complexity
+- Make sensible choices for ambiguous functionality, providing it can be easily corrected if wrong 
+(eg assume report does not quit, so we need an explicit quit command)
 
 ## Design
 
