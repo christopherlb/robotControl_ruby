@@ -21,6 +21,7 @@ class RobotApp
     @x = 0
     @y = 0
     @orientation = Orientation::EAST
+    @placed = false
   end
 
   def run
@@ -80,6 +81,8 @@ class RobotApp
     @x = x
     @y = y
     @orientation = o
+
+    @placed = true
   end
 
   def out_of_range(x, y)
@@ -109,6 +112,8 @@ class RobotApp
   end
 
   def handle_move
+    return unless @placed
+
     x = @x
     y = @y
     case @orientation
@@ -130,6 +135,8 @@ class RobotApp
   end
 
   def handle_rotate(direction)
+    return unless @placed
+
     @orientation = (@orientation + direction) % Orientation::ORIENTATION_MAX
   end
 end

@@ -80,10 +80,17 @@ RSpec.describe RobotApp do
   end
 
   describe "move" do
-    describe "default start" do
-      let(:input) { "move\nreport\nquit\n" }
+    describe "SW start" do
+      let(:input) { "place 0,0,E\nmove\nreport\nquit\n" }
       it "prints a default position" do
         expect(output.read).to include("1,0,E")
+      end
+    end
+
+    describe "does not do anything without an explicit PLACE command" do
+      let(:input) { "move\nreport\nquit\n" }
+      it "prints a default position" do
+        expect(output.read).to include("0,0,E")
       end
     end
 
@@ -151,12 +158,26 @@ RSpec.describe RobotApp do
         expect(output.read).to include("0,0,W")
       end
     end
+
+    describe "does not do anything without an explicit PLACE command" do
+      let(:input) { "left\nreport\nquit\n" }
+      it "prints a default position" do
+        expect(output.read).to include("0,0,E")
+      end
+    end
   end
 
   describe "right" do
     describe "when starting facing north" do
       let(:input) { "place 0,0,n\nright\nreport\nquit\n" }
       it "orients east" do
+        expect(output.read).to include("0,0,E")
+      end
+    end
+
+    describe "does not do anything without an explicit PLACE command" do
+      let(:input) { "right\nreport\nquit\n" }
+      it "prints a default position" do
         expect(output.read).to include("0,0,E")
       end
     end
