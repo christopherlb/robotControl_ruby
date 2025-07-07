@@ -15,9 +15,12 @@ ruby app/main.rb
 
 You can type or pipe commands via stdin. Commands need to be separated with a newline. They are not case sensitive.
 
-| Command | Action                |
-|---------|-----------------------|
-| quit    | Exits the application |
+| Command | Action                                         |
+|---------|------------------------------------------------|
+| quit    | Exits the application                          |
+| report  | Outputs the robot's <x,y,orientation>          |
+| place   | Forcibly places the robot at <x,y,orientation> | 
+| move    | Advance the robot one square, per orientation  |
 
 # Development philosophy
 
