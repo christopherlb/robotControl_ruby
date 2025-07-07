@@ -25,6 +25,7 @@ You can type or pipe commands via stdin. Commands need to be separated with a ne
 - TDD as we go
 - Emergent design
 - KISS
+- Assume the service will not grow significantly in complexity
 
 # Task
 
