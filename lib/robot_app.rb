@@ -22,6 +22,7 @@ class RobotApp
     @y = 0
     @orientation = Orientation::EAST
     @placed = false
+    @unplaced_report = "Not placed yet\n"
   end
 
   def run
@@ -96,7 +97,7 @@ class RobotApp
 
   def handle_report
     unless @placed
-      @io.puts("Not placed yet\n")
+      @io.puts(@unplaced_report)
       return
     end
 
