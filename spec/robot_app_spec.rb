@@ -57,6 +57,20 @@ RSpec.describe RobotApp do
       end
     end
 
+    describe "contains invalid characters" do
+      let(:input) { "place 😃,0,E\nreport\nquit\n" }
+      it "does not crash, and displays a message" do
+        expect(output.read).to include("Not placed yet")
+      end
+    end
+
+    describe "contains chinese characters" do
+      let(:input) { "place 三,0,E\nreport\nquit\n" }
+      it "does not crash, and displays a message" do
+        expect(output.read).to include("Not placed yet")
+      end
+    end
+
     describe "is not the default" do
       let(:input) { "PLace 1,2,w\nreport\nquit\n" }
       it "prints a default position" do

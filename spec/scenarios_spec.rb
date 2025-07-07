@@ -82,4 +82,11 @@ RSpec.describe RobotApp do
       expect(output.read).to include("0,0,E")
     end
   end
+
+  describe "input is substantially in Chinese characters" do
+    let(:input) { ["地点 三,二,东", "report"] }
+    it "does not crash, and displays a message" do
+      expect(output.read).to include("Not placed yet")
+    end
+  end
 end
