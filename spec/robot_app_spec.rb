@@ -16,28 +16,36 @@ RSpec.describe RobotApp do
       def gets
         @input.gets
       end
-    end.new(input, output)
+    end.new(StringIO.new(input), output)
   end
 
   let(:app) { RobotApp.new(io: io_proxy) }
 
   before do
     app.run
+    output.rewind
   end
 
   describe "the input is just 'quit'" do
-    let(:input) { StringIO.new("quit\n") }
+    let(:input) { "quit\n" }
     it "greets the user on start" do
-      output.rewind
       expect(output.read).to include("Toy robot, waiting for input")
     end
   end
 
   describe "when the input contains unknown stuff" do
-    let(:input) { StringIO.new("fooo\nquitll\nquit\n") }
+    let(:input) { "fooo\nquitll\nquit\n" }
     it "is tolerant of misformed input" do
-      output.rewind
       expect(output.read).to include("Toy robot, waiting for input")
+    end
+  end
+
+  describe "report" do
+    describe "when in a default state" do
+      let(:input) { "report\nquit\n" }
+      it "prints a default position" do
+        expect(output.read).to include("Toy robot, waiting for input\n0,0,E")
+      end
     end
   end
 end
