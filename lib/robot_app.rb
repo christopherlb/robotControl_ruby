@@ -26,6 +26,10 @@ class RobotApp
         orientation = match[3].upcase
       end
 
+      if input == "move"
+        x += 1
+      end
+
       break if input == "quit"
     end
   end
