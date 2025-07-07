@@ -21,6 +21,8 @@ You can type or pipe commands via stdin. Commands need to be separated with a ne
 | report  | Outputs the robot's <x,y,orientation>          |
 | place   | Forcibly places the robot at <x,y,orientation> | 
 | move    | Advance the robot one square, per orientation  |
+| left    | Rotate the robot 90* anticlockwise             |
+| right   | Rotate the robot 90* clockwise                 |
 
 # Development philosophy
 
@@ -92,7 +94,7 @@ MOVE
 REPORT
 Output: 1,0,E
 
-### Two
+## Two
 
 PLACE 0,0,N
 MOVE
