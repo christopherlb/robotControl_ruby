@@ -24,13 +24,41 @@ You can type or pipe commands via stdin. Commands need to be separated with a ne
 | left    | Rotate the robot 90* anticlockwise             |
 | right   | Rotate the robot 90* clockwise                 |
 
-# Development philosophy
+# Development 
+
+## Philosophy
 
 - Iterative development, with a feature breadth first approach
 - TDD as we go
 - Emergent design
 - KISS
 - Assume the service will not grow significantly in complexity
+
+## Design
+
+Nothing in the requirements prompted a complex multi-class structure, or hinted that this would be advantageous in the
+near future. As such, the design revolves around a single `RobotApp` class that encapsules all game rules, IO validation
+and state. The handling of commands is pulled out into separate methods to enable readability.
+
+A thin IO wrapper `IoProxy` is used to separate the console, allowing for clean mocking (and to account that there is
+the slight possibility of a near future swap of IO from STDIN etc hinted at in the requirement)s.
+
+Accordingly testing is split into a lower level set of specs in `spec/robot_app_spec.rb`, which primarily focuses on 
+the specific responsibilities of each command, and `spec/scenarios_spec.rb` which presents and asserts the output 
+after command sequences, primarily looking at complexity.
+
+## Future direction
+
+Depending on what new requirements occur, consider:
+
+- Commands as first class classes to allow many more commands
+- Command pattern to allow undo-ability with a stack. We might want to rewrite PLACE using a sequence 
+of move commands so it can be reversed.
+- Allow more separators beyond \n or complex (json or xml) input formats
+- Log invalid commands
+- Separate game state and rules to better encapsulate fundamental restrictions from convenience 
+(eg robot cannot go out of bounds vs move goes one square)
+- Refactor tests to allow better discoverability
 
 # Task
 
