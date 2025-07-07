@@ -43,8 +43,8 @@ RSpec.describe RobotApp do
   describe "report" do
     describe "when in a default state" do
       let(:input) { "report\nquit\n" }
-      it "prints a default position" do
-        expect(output.read).to include("0,0,E")
+      it "informs user to place" do
+        expect(output.read).to include("Not placed yet")
       end
     end
   end
@@ -90,7 +90,9 @@ RSpec.describe RobotApp do
     describe "does not do anything without an explicit PLACE command" do
       let(:input) { "move\nreport\nquit\n" }
       it "prints a default position" do
-        expect(output.read).to include("0,0,E")
+        op = output.read
+        expect(op).not_to include("1,0,E")
+        expect(op).to include("Not placed yet")
       end
     end
 
@@ -162,7 +164,9 @@ RSpec.describe RobotApp do
     describe "does not do anything without an explicit PLACE command" do
       let(:input) { "left\nreport\nquit\n" }
       it "prints a default position" do
-        expect(output.read).to include("0,0,E")
+        op = output.read
+        expect(op).not_to include("0,0,N")
+        expect(op).to include("Not placed yet")
       end
     end
   end
@@ -178,7 +182,9 @@ RSpec.describe RobotApp do
     describe "does not do anything without an explicit PLACE command" do
       let(:input) { "right\nreport\nquit\n" }
       it "prints a default position" do
-        expect(output.read).to include("0,0,E")
+        op = output.read
+        expect(op).not_to include("0,0,S")
+        expect(op).to include("Not placed yet")
       end
     end
   end

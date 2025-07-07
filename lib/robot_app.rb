@@ -95,6 +95,11 @@ class RobotApp
   end
 
   def handle_report
+    unless @placed
+      @io.puts("Not placed yet\n")
+      return
+    end
+
     orientation_string = case @orientation
     when Orientation::EAST
       "E"
