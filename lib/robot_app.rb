@@ -2,13 +2,22 @@
 require_relative 'io_proxy'
 
 class RobotApp
+
+  module Orientation
+    EAST = 1
+    SOUTH = 2
+    WEST = 3
+    NORTH = 4
+    ORIENTATION_MAX = 5
+  end
+
   def initialize(io: IOProxy.new)
     @io = io
 
     # Position (0,0) on the grid is the south west corner
     @x = 0
     @y = 0
-    @orientation = "E"
+    @orientation = Orientation::EAST
   end
 
   def run
@@ -40,27 +49,52 @@ class RobotApp
   private
 
   def handle_place(match)
+    o = case match[3]
+      when "e"
+       Orientation::EAST
+      when "w"
+       Orientation::WEST
+      when "n"
+       Orientation::NORTH
+      when "s"
+       Orientation::SOUTH
+      else
+       raise "Unknown orientation #{@orientation}"
+      end
     @x = match[1].to_i
     @y = match[2].to_i
-    @orientation = match[3].upcase
+    @orientation = o
   end
 
   def handle_report
-    @io.puts("#{@x},#{@y},#{@orientation}")
+    orientation_string = case @orientation
+    when Orientation::EAST
+      "E"
+    when Orientation::WEST
+      "W"
+    when Orientation::NORTH
+      "N"
+    when Orientation::SOUTH
+      "S"
+    else
+      raise "Unknown orientation #{@orientation}"
+    end
+
+    @io.puts("#{@x},#{@y},#{orientation_string}")
   end
 
   def handle_move
     case @orientation
-    when "E"
+    when Orientation::EAST
       @x += 1
-    when "W"
+    when Orientation::WEST
       @x -= 1
-    when "N"
+    when Orientation::NORTH
       @y += 1
-    when "S"
+    when Orientation::SOUTH
       @y -= 1
     else
-      raise "Unknown orientation"
+      raise "Unknown orientation #{@orientation}"
     end
   end
 end
