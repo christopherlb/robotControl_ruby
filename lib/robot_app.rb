@@ -10,8 +10,12 @@ class RobotApp
     @io.puts "Toy robot, waiting for input"
 
     loop do
-      input = @io.gets&.strip
-      break if input&.downcase == "quit"
+      input = @io.gets&.strip&.downcase
+      if input == "report"
+        @io.puts("0,0,E")
+      end
+
+      break if input == "quit"
     end
   end
 end
