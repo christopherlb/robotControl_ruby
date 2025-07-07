@@ -64,10 +64,17 @@ RSpec.describe RobotApp do
       end
     end
 
-    describe "when trying to place out of the board" do
+    describe "when trying to place out of the board on x" do
       let(:input) { "place 110,0,w\nreport\nquit\n" }
       it "prints a default position" do
         expect(output.read).not_to include("110,0,W")
+      end
+    end
+
+    describe "when trying to place out of the board on y" do
+      let(:input) { "place 0,110,w\nreport\nquit\n" }
+      it "prints a default position" do
+        expect(output.read).not_to include("0,110,W")
       end
     end
   end
