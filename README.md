@@ -4,6 +4,7 @@ Implement the robot control toy problem, specifically in Ruby.
 
 # How to use the app
 
+Tested on Ruby 3.4.4, other versions may work, providing tests pass.
 
 ```shell
 bundle install
